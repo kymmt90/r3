@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20160528102534) do
     t.datetime "updated_at", null: false
   end
 
+  add_index "feeds", ["url"], name: "index_feeds_on_url", unique: true
+
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
