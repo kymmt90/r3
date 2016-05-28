@@ -16,6 +16,12 @@ RSpec.describe Entry, type: :model do
       expect(build(:entry, url: nil)).not_to be_valid
     end
 
+    it 'is invalid with a duplicated URL' do
+      create(:entry, url: 'http://example.com/entry.xml')
+      entry = build(:entry, url: 'http://example.com/entry.xml')
+      expect(entry).not_to be_valid
+    end
+
     it 'is invalid with a invalid URL' do
       invalid_url = "javascript:alert('XSS');//http://example.com/"
       expect(build(:entry, url: invalid_url)).not_to be_valid

@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 20160528102534) do
   end
 
   add_index "entries", ["feed_id"], name: "index_entries_on_feed_id"
+  add_index "entries", ["url"], name: "index_entries_on_url", unique: true
 
   create_table "feeds", force: :cascade do |t|
     t.string   "title"
