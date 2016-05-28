@@ -4,10 +4,10 @@ class Feed < ActiveRecord::Base
            dependent: :destroy
   has_many :users, through: :subscriptions
 
-  has_many :feed_categorization,
+  has_many :feed_categorizations,
            foreign_key: 'feed_id',
            dependent: :destroy
-  has_many :categories, through: :feed_categorization
+  has_many :categories, through: :feed_categorizations
 
   validates :title, presence: true
   validates :url,

@@ -1,10 +1,10 @@
 class Category < ActiveRecord::Base
   belongs_to :user
 
-  has_many :feed_categorization,
+  has_many :feed_categorizations,
            foreign_key: 'category_id',
            dependent: :destroy
-  has_many :feeds, through: :feed_categorization
+  has_many :feeds, through: :feed_categorizations
 
   validates :name,
             presence: true,
