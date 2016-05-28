@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160528110942) do
+ActiveRecord::Schema.define(version: 20160528132040) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 20160528110942) do
 
   add_index "entries", ["feed_id"], name: "index_entries_on_feed_id"
   add_index "entries", ["url"], name: "index_entries_on_url", unique: true
+
+  create_table "feed_categorizations", force: :cascade do |t|
+    t.integer  "category_id", null: false
+    t.integer  "feed_id",     null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "feed_categorizations", ["category_id", "feed_id"], name: "index_feed_categorizations_on_category_id_and_feed_id", unique: true
+  add_index "feed_categorizations", ["category_id"], name: "index_feed_categorizations_on_category_id"
+  add_index "feed_categorizations", ["feed_id"], name: "index_feed_categorizations_on_feed_id"
 
   create_table "feeds", force: :cascade do |t|
     t.string   "title"
