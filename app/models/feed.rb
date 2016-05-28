@@ -1,8 +1,8 @@
 class Feed < ActiveRecord::Base
-  has_many :subscription,
+  has_many :subscriptions,
            foreign_key: 'feed_id',
            dependent: :destroy
-  has_many :users, through: :subscription
+  has_many :users, through: :subscriptions
 
   has_many :feed_categorization,
            foreign_key: 'feed_id',
