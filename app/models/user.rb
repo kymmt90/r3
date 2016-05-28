@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
   has_many :categories
 
+  has_many :subscription,
+           foreign_key: 'user_id',
+           dependent: :destroy
+
+  has_many :feeds, through: :subscription
+
   validates :name, presence: true, length: { maximum: 20 }
   validates :email, presence: true, uniqueness: true
 
