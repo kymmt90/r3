@@ -29,6 +29,12 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
     end
 
+    it 'ignores the case of emails' do
+      create(:user, email: 'Foobar@example.com')
+      user = build(:user, email: 'foobar@example.com')
+      expect(user).not_to be_valid
+    end
+
     it 'is invalid without a password' do
       user = build(:user, password: nil, password_confirmation: nil)
       expect(user).not_to be_valid
