@@ -15,5 +15,19 @@ RSpec.describe Category, type: :model do
     it 'is invalid with a long name' do
       expect(build(:category, name: 'a' * 21)).not_to be_valid
     end
+
+    it 'is invalid with a duplicated name' do
+      user = create(:user)
+      create(:category, user: user, name: 'foobar')
+      category = build(:category, user: user, name: 'foobar')
+      expect(category).not_to be_valid
+    end
+
+    it 'ignores the case of names' do
+      user = create(:user)
+      create(:category, user: user, name: 'foobar')
+      category = build(:category, user: user, name: 'Foobar')
+      expect(category).not_to be_valid
+    end
   end
 end
