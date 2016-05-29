@@ -6,5 +6,9 @@ FactoryGirl.define do
     email { Faker::Internet.email }
     password 'password'
     password_confirmation 'password'
+
+    factory :invalid_user do
+      name nil
+    end
   end
 end
