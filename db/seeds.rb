@@ -1,7 +1,17 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'factory_girl_rails'
+
+user1 = FactoryGirl.create(:user, name: 'Foo')
+user2 = FactoryGirl.create(:user, name: 'Bar')
+
+feed1 = FactoryGirl.create(:feed, url: 'http://example.com/feed1.xml')
+feed2 = FactoryGirl.create(:feed, url: 'http://example.com/feed2.xml')
+
+30.times do
+  FactoryGirl.create(:entry, feed_id: feed1.id)
+  FactoryGirl.create(:entry, feed_id: feed2.id)
+end
+
+2.times do
+  FactoryGirl.create(:category, user_id: user1.id)
+  FactoryGirl.create(:category, user_id: user2.id)
+end
