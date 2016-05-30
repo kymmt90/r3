@@ -1,0 +1,5 @@
+%h1= link_to @feed.title, @feed.url
+
+%ul
+  - @feed.entries.each do |entry|
+    %li= link_to "#{entry.title}", feed_entry_path(@feed, entry)

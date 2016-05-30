@@ -1,0 +1,6 @@
+%h1= link_to @entry.title, @entry.url
+
+%p
+  %small= "by #{@entry.author} at #{@entry.published_at}"
+
+%p= @entry.summary

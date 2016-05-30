@@ -1,4 +1,6 @@
 class Feed < ActiveRecord::Base
+  has_many :entries
+
   has_many :subscriptions,
            foreign_key: 'feed_id',
            dependent: :destroy
