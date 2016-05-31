@@ -1,2 +1,8 @@
 %header
   = link_to 'R3', root_path
+  %ul
+    - if logged_in?
+      %li= link_to 'Subscriptions', '#'
+      %li= link_to 'Log out', logout_path, method: :delete
+    - else
+      %li= link_to 'Log in', login_path
