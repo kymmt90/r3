@@ -1,3 +1,5 @@
+require 'feedjira'
+
 class Feed < ActiveRecord::Base
   has_many :entries
 
@@ -12,8 +14,20 @@ class Feed < ActiveRecord::Base
   has_many :categories, through: :feed_categorizations
 
   validates :title, presence: true
+
+  URL_REGEXP = /\A#{URI::regexp(%w(http https))}\z/
   validates :url,
             presence: true,
             uniqueness: true,
-            format: /\A#{URI::regexp(%w(http https))}\z/
+            format: URL_REGEXP
+
+  def self.fetch(url)
+    return nil unless url =~ URL_REGEXP
+
+    feed = Feedjira::Feed.fetch_and_parse(url)
+    return Feed.find_by(url: feed.url) if Feed.exists?(url: url)
+
+    feed = Feed.new(url: feed.url, title: feed.title)
+    feed.save ? feed : nil
+  end
 end

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
-  resources :users, except: [:index]
+  resources :users, except: [:index] do
+    resources :subscriptions, only: [:index, :new, :create, :destroy]
+  end
   resources :feeds, only: [:create, :destroy] do
     resources :entries, only: [:index, :show]
   end

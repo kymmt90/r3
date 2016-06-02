@@ -1,0 +1,7 @@
+%h1 Subscribe a new feed
+
+= form_for [current_user, @subscription] do |f|
+  = label_tag :feed_url
+  = text_field_tag :feed_url
+
+  = f.submit 'Submit'
