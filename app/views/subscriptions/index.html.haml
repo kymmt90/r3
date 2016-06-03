@@ -2,4 +2,6 @@
 
 - @subscriptions.each do |subscription|
   %h2= link_to subscription.feed.title, subscription.feed.url
+  - subscription.feed.categories.each do |category|
+    %span= category.name
   %span= link_to 'delete', user_subscription_path(current_user, subscription), method: :delete

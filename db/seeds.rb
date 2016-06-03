@@ -12,11 +12,15 @@ FactoryGirl.create(:feed, url: 'http://example.com/feed3.xml')
   FactoryGirl.create(:entry, feed_id: feed2.id)
 end
 
-2.times do
-  FactoryGirl.create(:category, user_id: user1.id)
-  FactoryGirl.create(:category, user_id: user2.id)
-end
+category1 = FactoryGirl.create(:category, user_id: user1.id)
+category2 = FactoryGirl.create(:category, user_id: user2.id)
+category3 = FactoryGirl.create(:category, user_id: user1.id)
+category4 = FactoryGirl.create(:category, user_id: user2.id)
 
 FactoryGirl.create(:subscription, user_id: user1.id, feed_id: feed1.id)
 FactoryGirl.create(:subscription, user_id: user1.id, feed_id: feed2.id)
 FactoryGirl.create(:subscription, user_id: user2.id, feed_id: feed1.id)
+
+FactoryGirl.create(:feed_categorization, feed_id: feed1.id, category_id: category1.id)
+FactoryGirl.create(:feed_categorization, feed_id: feed1.id, category_id: category2.id)
+FactoryGirl.create(:feed_categorization, feed_id: feed2.id, category_id: category3.id)

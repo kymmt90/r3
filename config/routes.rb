@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :users, except: [:index] do
     resources :subscriptions, only: [:index, :new, :create, :destroy]
+    resources :feed_categorizations, only: [:index, :create, :destroy]
   end
   resources :feeds, only: [:create, :destroy] do
     resources :entries, only: [:index, :show]

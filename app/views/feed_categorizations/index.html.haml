@@ -1,0 +1,7 @@
+%h1= "#{current_user.name}'s categories"
+
+- @categories.each do |category|
+  %h2= "#{category.name}"
+  %ul
+    - category.feeds.each do |feed|
+      %li= link_to feed.title, feed.url
