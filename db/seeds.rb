@@ -8,8 +8,11 @@ feed2 = FactoryGirl.create(:feed, url: 'http://example.com/feed2.xml')
 FactoryGirl.create(:feed, url: 'http://example.com/feed3.xml')
 
 30.times do
-  FactoryGirl.create(:entry, feed_id: feed1.id)
-  FactoryGirl.create(:entry, feed_id: feed2.id)
+  entry1 = FactoryGirl.create(:entry, feed_id: feed1.id)
+  FactoryGirl.create(:reading_status, entry_id: entry1.id, user_id: user1.id, status: ReadingStatus.statuses[:saved])
+  FactoryGirl.create(:reading_status, entry_id: entry1.id, user_id: user2.id, status: ReadingStatus.statuses[:unread])
+  entry2 = FactoryGirl.create(:entry, feed_id: feed2.id)
+  FactoryGirl.create(:reading_status, entry_id: entry2.id, user_id: user1.id, status: ReadingStatus.statuses[:read])
 end
 
 category1 = FactoryGirl.create(:category, user_id: user1.id)

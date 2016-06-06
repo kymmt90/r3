@@ -3,3 +3,5 @@
 %ul
   - @feed.entries.each do |entry|
     %li= link_to "#{entry.title}", feed_entry_path(@feed, entry)
+    - if logged_in? && current_user.subscriptions.exists?(feed_id: @feed.id)
+      %span= current_user.reading_statuses.find_by(entry_id: entry.id).status
