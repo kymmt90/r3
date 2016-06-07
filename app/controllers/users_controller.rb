@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_action :check_logged_in, except: [:new, :create]
+  before_action :check_correct_user, except: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   def show
@@ -39,6 +41,11 @@ class UsersController < ApplicationController
 
 
   private
+
+  def check_correct_user
+    user = User.find_by(id: params[:id])
+    redirect_to root_url unless current_user?(user)
+  end
 
   def set_user
     @user = User.find(params[:id])

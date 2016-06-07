@@ -1,4 +1,6 @@
 class FeedCategorizationsController < ApplicationController
+  before_action :check_logged_in
+  before_action :check_correct_user
   before_action :set_feed, except: [:index]
 
   def index
@@ -23,6 +25,11 @@ class FeedCategorizationsController < ApplicationController
 
 
   private
+
+  def check_correct_user
+    user = User.find_by(id: params[:user_id])
+    redirect_to root_url unless current_user?(user)
+  end
 
   def set_feed
     @feed = Feed.find(params[:feed_id])

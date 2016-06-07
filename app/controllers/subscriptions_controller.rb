@@ -1,4 +1,7 @@
 class SubscriptionsController < ApplicationController
+  before_action :check_logged_in
+  before_action :check_correct_user
+
   def index
     @subscriptions = current_user.subscriptions.all
   end
@@ -35,5 +38,13 @@ class SubscriptionsController < ApplicationController
     feed = Feed.find_by(id: params[:id])
     flash[:success] = "\"#{feed.title}\" unsubscribed"
     redirect_to user_subscriptions_path(current_user)
+  end
+
+
+  private
+
+  def check_correct_user
+    user = User.find_by(id: params[:user_id])
+    redirect_to root_url unless current_user?(user)
   end
 end

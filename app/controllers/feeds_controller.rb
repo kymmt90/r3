@@ -1,4 +1,6 @@
 class FeedsController < ApplicationController
+  before_action :check_logged_in
+
   def create
     @feed = Feed.new(feed_params)
     @feed.save

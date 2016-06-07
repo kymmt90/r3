@@ -1,4 +1,5 @@
 class EntriesController < ApplicationController
+  before_action :check_logged_in
   before_action :set_feed
 
   def index
