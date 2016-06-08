@@ -1,20 +1,28 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: [:update, :destroy]
+  before_action :check_logged_in
+  before_action :set_category, only: [:edit, :update, :destroy]
+
+  def new
+    @category = Category.new
+  end
 
   def create
-    @category = Category.new(category_params)
+    @category = Category.new(name: params[:category][:name], user_id: current_user.id)
     if @category.save
       flash[:success] = 'Category created'
-      redirect_to @category.user
+      redirect_to user_feed_categorizations_url(current_user)
     else
       redirect_to root_url
     end
   end
 
+  def edit
+  end
+
   def update
-    if @category.update_attributes(category_params)
+    if @category.update_attributes(name: params[:category][:name])
       flash[:success] = 'Category updated'
-      redirect_to @category.user
+      redirect_to user_feed_categorizations_url(current_user)
     else
       redirect_to root_url
     end
@@ -22,7 +30,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category.destroy
-    redirect_to root_url
+    redirect_to user_feed_categorizations_url(current_user)
   end
 
 
@@ -30,9 +38,5 @@ class CategoriesController < ApplicationController
 
   def set_category
     @category = Category.find(params[:id])
-  end
-
-  def category_params
-    params.require(:category).permit(:name, :user_id)
   end
 end

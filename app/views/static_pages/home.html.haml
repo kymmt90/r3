@@ -1,3 +1,5 @@
-%h1 Welcome to R3
-
-%p= link_to 'Create your user account', new_user_path
+- if logged_in?
+  = render partial: 'shared/user', locals: { user: current_user }
+- else
+  %h1 Welcome to R3
+  %p= link_to 'Create your user account', new_user_path

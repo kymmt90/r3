@@ -1,14 +1,18 @@
 class FeedCategorizationsController < ApplicationController
   before_action :check_logged_in
   before_action :check_correct_user
-  before_action :set_feed, except: [:index]
 
   def index
     @categories = current_user.categories.all
   end
 
+  def new
+    @category = Category.find(params[:category_id])
+  end
+
   def create
-    @categorization = @feed.feed_categorizations.build(category_id: params[:category_id])
+    @feed = Feed.find(params[:feed])
+    @categorization = @feed.feed_categorizations.build(category_id: params[:category])
     if @categorization.save
       redirect_to user_feed_categorizations_path(current_user)
     else
@@ -18,7 +22,7 @@ class FeedCategorizationsController < ApplicationController
   end
 
   def destroy
-    categorization = @feed.feed_categorizations.find_by(category_id: params[:category_id])
+    categorization = FeedCategorization.find(params[:id])
     categorization.destroy
     redirect_to user_feed_categorizations_path(current_user)
   end
@@ -29,9 +33,5 @@ class FeedCategorizationsController < ApplicationController
   def check_correct_user
     user = User.find_by(id: params[:user_id])
     redirect_to root_url unless current_user?(user)
-  end
-
-  def set_feed
-    @feed = Feed.find(params[:feed_id])
   end
 end

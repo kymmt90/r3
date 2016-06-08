@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :users, except: [:index] do
     resources :subscriptions, only: [:index, :new, :create, :destroy]
-    resources :feed_categorizations, only: [:index, :create, :destroy]
+    resources :feed_categorizations, only: [:index, :new, :create, :destroy]
   end
-  resources :feeds, only: [:create, :destroy] do
+  resources :feeds, only: [:show, :create, :destroy] do
     resources :entries, only: [:index, :show]
   end
-  resources :categories, only: [:create, :update, :destroy]
+  resources :categories, only: [:new, :create, :edit, :update, :destroy]
 end

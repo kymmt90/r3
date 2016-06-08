@@ -25,7 +25,7 @@ class Feed < ActiveRecord::Base
     return nil unless url =~ URL_REGEXP
 
     feed = Feedjira::Feed.fetch_and_parse(url)
-    return Feed.find_by(url: feed.url) if Feed.exists?(url: url)
+    return Feed.find_by(url: feed.url) if Feed.exists?(url: feed.url)
 
     feed = Feed.new(url: feed.url, title: feed.title)
     feed.save ? feed : nil

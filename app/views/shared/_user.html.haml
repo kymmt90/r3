@@ -1,0 +1,7 @@
+%h1= user.name
+
+%p= "<#{user.email}>"
+
+%p= link_to 'Subscribe new feed', new_user_subscription_path(user)
+
+= render partial: 'shared/subscriptions', locals: { user: user }

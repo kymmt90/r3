@@ -1,0 +1,7 @@
+%h1 Create new category
+
+= form_for @category do |f|
+  = f.label :name
+  = f.text_field :name
+
+  = f.submit 'Submit'
