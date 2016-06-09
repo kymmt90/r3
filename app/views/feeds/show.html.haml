@@ -1,3 +1,6 @@
 %h1= link_to @feed.title, @feed.url
 
+%p
+  %small= link_to 'Refresh', refresh_feed_path(@feed)
+
 = render @feed.entries

@@ -1,8 +1,8 @@
 class FeedsController < ApplicationController
   before_action :check_logged_in
+  before_action :set_feed, only: [:show, :destroy, :refresh]
 
   def show
-    @feed = Feed.find(params[:id])
   end
 
   def create
@@ -12,13 +12,21 @@ class FeedsController < ApplicationController
   end
 
   def destroy
-    @feed = Feed.find(params[:id])
     @feed.destroy
     redirect_to root_url
   end
 
+  def refresh
+    @feed.refresh
+    redirect_to @feed
+  end
+
 
   private
+
+  def set_feed
+    @feed = Feed.find(params[:id])
+  end
 
   def feed_params
     params.require(:feed).permit(:title, :url)
