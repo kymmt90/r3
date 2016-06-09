@@ -26,15 +26,22 @@ class Feed < ActiveRecord::Base
 
   def self.fetch(feed_url)
     return nil unless feed_url =~ URL_REGEXP
+    self.fetch_and_save(feed_url)
+  end
 
-    fetched_feed = Feedjira::Feed.fetch_and_parse(feed_url)
-    @feed = save_feed(fetched_feed)
-    save_entries(fetched_feed)
-    @feed
+  def refresh
+    Feed.fetch_and_save(feed_url)
   end
 
 
   private
+
+  def self.fetch_and_save(feed_url)
+    fetched_feed = Feedjira::Feed.fetch_and_parse(feed_url)
+    feed = self.save_feed(fetched_feed)
+    self.save_entries(feed, fetched_feed.entries)
+    feed
+  end
 
   def self.save_feed(fetched_feed)
     return Feed.find_by(url: fetched_feed.url) if Feed.exists?(url: fetched_feed.url)
@@ -43,13 +50,14 @@ class Feed < ActiveRecord::Base
                 title: fetched_feed.title)
   end
 
-  def self.save_entries(fetched_feed)
-    fetched_feed.entries.each do |fetched_entry|
-      @feed.entries.create(title: fetched_entry.title,
-                           url: fetched_entry.url,
-                           author: fetched_entry.author,
-                           published_at: fetched_entry.published,
-                           summary: fetched_entry.summary)
+  def self.save_entries(feed, fetched_entries)
+    fetched_entries.each do |fetched_entry|
+      next unless Feed.exists?(url: fetched_entry.url)
+      feed.entries.create(title: fetched_entry.title,
+                          url: fetched_entry.url,
+                          author: fetched_entry.author,
+                          published_at: fetched_entry.published,
+                          summary: fetched_entry.summary)
     end
   end
 end
