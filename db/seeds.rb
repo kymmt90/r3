@@ -3,9 +3,9 @@ require 'factory_girl_rails'
 user1 = FactoryGirl.create(:user, name: 'Foo', email: 'foo@example.com')
 user2 = FactoryGirl.create(:user, name: 'Bar', email: 'bar@example.com')
 
-feed1 = FactoryGirl.create(:feed, url: 'http://example.com/feed1.xml')
-feed2 = FactoryGirl.create(:feed, url: 'http://example.com/feed2.xml')
-FactoryGirl.create(:feed, url: 'http://example.com/feed3.xml')
+feed1 = FactoryGirl.create(:feed, url: 'http://example.com', feed_url: 'http://example.com/feed1.xml')
+feed2 = FactoryGirl.create(:feed, url: 'http://example.com', feed_url: 'http://example.com/feed2.xml')
+FactoryGirl.create(:feed, url: 'http://example.com', feed_url: 'http://example.com/feed3.xml')
 
 30.times do
   entry1 = FactoryGirl.create(:entry, feed_id: feed1.id)

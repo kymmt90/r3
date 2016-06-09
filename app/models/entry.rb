@@ -12,4 +12,6 @@ class Entry < ActiveRecord::Base
             uniqueness: true,
             format: /\A#{URI::regexp(%w(http https))}\z/
   validates :published_at, presence: true
+
+  default_scope -> { order(published_at: :desc) }
 end

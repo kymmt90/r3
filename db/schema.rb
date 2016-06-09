@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602110710) do
+ActiveRecord::Schema.define(version: 20160609124426) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -53,9 +53,10 @@ ActiveRecord::Schema.define(version: 20160602110710) do
     t.string   "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "feed_url"
   end
 
-  add_index "feeds", ["url"], name: "index_feeds_on_url", unique: true
+  add_index "feeds", ["feed_url"], name: "index_feeds_on_feed_url", unique: true
 
   create_table "reading_statuses", force: :cascade do |t|
     t.integer  "user_id",              null: false
