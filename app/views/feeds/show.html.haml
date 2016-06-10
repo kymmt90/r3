@@ -3,4 +3,5 @@
 %p
   %small= link_to 'Refresh', refresh_feed_path(@feed)
 
-= render @feed.entries
+- @feed.entries.each do |entry|
+  = render partial: 'shared/entry', locals: { entry: entry, user: current_user }

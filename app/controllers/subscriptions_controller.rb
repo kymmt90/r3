@@ -22,6 +22,7 @@ class SubscriptionsController < ApplicationController
     @subscription = current_user.subscriptions.build(user_id: current_user.id,
                                                      feed_id: @feed.id)
     if @subscription.save
+      @feed.initialize_reading_statuses(current_user)
       flash[:success] = "\"#{@feed.title}\" subscribed"
       redirect_to user_subscriptions_path(current_user)
     else

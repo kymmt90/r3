@@ -45,6 +45,11 @@ class User < ActiveRecord::Base
     update_attribute(:remember_digest, nil)
   end
 
+  def subscribe?(feed)
+    feeds.include?(feed)
+  end
+
+
   private
 
   def downcase_email

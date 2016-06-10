@@ -8,6 +8,10 @@ class EntriesController < ApplicationController
 
   def show
     @entry = @feed.entries.find(params[:id])
+    if current_user.subscribe?(@feed)
+      status = @entry.reading_statuses.find_by(user_id: current_user.id)
+      status.update_attributes(status: :read)
+    end
   end
 
 

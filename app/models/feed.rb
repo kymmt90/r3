@@ -33,6 +33,15 @@ class Feed < ActiveRecord::Base
     Feed.fetch_and_save(feed_url)
   end
 
+  def initialize_reading_statuses(user)
+    entries.each do |entry|
+      next if ReadingStatus.exists?(user_id: user.id, entry_id: entry.id)
+      entry.reading_statuses.create(user_id: user.id,
+                                    entry_id: entry.id,
+                                    status: :unread)
+    end
+  end
+
 
   private
 
