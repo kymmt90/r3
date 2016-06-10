@@ -52,7 +52,7 @@ class Feed < ActiveRecord::Base
 
   def self.save_entries(feed, fetched_entries)
     fetched_entries.each do |fetched_entry|
-      next unless Feed.exists?(url: fetched_entry.url)
+      next if Entry.exists?(url: fetched_entry.url)
       feed.entries.create(title: fetched_entry.title,
                           url: fetched_entry.url,
                           author: fetched_entry.author,
