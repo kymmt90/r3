@@ -1,7 +1,8 @@
-%h1 Subscribe a new feed
+%h1 Add new feed to your subscriptions
 
 = form_for [current_user, @subscription] do |f|
-  = label_tag :feed_url
-  = text_field_tag :feed_url
+  .form-group
+    = label_tag :feed_url
+    = text_field_tag :feed_url, nil, class: 'form-control'
 
-  = f.submit 'Submit'
+  = f.submit 'Submit', class: 'btn btn-default'

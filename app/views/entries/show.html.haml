@@ -1,6 +1,10 @@
-%h1= link_to @entry.title, @entry.url
+%h1= link_to @entry.title, @entry.url, target: '_blank'
 
 %p
   %small= "by #{@entry.author} at #{@entry.published_at}"
+  %small /
+  %small= link_to 'keep unread', '#'
 
-%p= @entry.summary
+%p.well
+  = @entry.summary
+  = link_to 'read more', @entry.url, target: '_blank'

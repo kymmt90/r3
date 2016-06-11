@@ -1,5 +1,6 @@
-- user.subscriptions.each do |subscription|
-  %h2= link_to subscription.feed.title, subscription.feed
-  - subscription.feed.categories.each do |category|
-    %span= category.name
-  %span= link_to 'delete', user_subscription_path(user, subscription), method: :delete
+.list-group
+  - user.subscriptions.each do |subscription|
+    %a{ class: 'list-group-item',
+        href:  feed_path(subscription.feed) }
+      = "#{subscription.feed.title}"
+      %span.badge 0

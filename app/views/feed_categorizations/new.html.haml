@@ -1,7 +1,10 @@
-%h1= "Add #{@category.name}"
+%h1= "Add the feed to #{@category.name}"
 
 = form_tag controller: 'feed_categorizations', action: 'create', method: :post do
-  = label_tag :feed, 'to feed'
-  = select_tag :feed, options_from_collection_for_select(current_user.feeds, :id, :title)
+  .form-group
+    = label_tag :feed
+    = select_tag :feed, options_from_collection_for_select(current_user.feeds, :id, :title), class: 'form-control'
+
   = hidden_field_tag :category, @category.id
-  = submit_tag 'Submit'
+
+  = submit_tag 'Submit', class: 'btn btn-default'

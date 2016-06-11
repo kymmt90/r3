@@ -1,7 +1,7 @@
-%h1= link_to @feed.title, @feed.url
-
-%p
+%h1
+  = link_to @feed.title, @feed.url, target: '_blank'
   %small= link_to 'Refresh', refresh_feed_path(@feed)
 
+.list-group
 - @feed.entries.each do |entry|
   = render partial: 'shared/entry', locals: { entry: entry, user: current_user }

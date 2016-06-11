@@ -1,16 +1,17 @@
 %h1 Log in
 
 = form_for(:session, url: login_path) do |f|
-  = f.label :email
-  = f.email_field :email
+  .form-group
+    = f.label :email
+    = f.email_field :email, class: 'form-control'
 
-  = f.label :password
-  = f.password_field :password
+  .form-group
+    = f.label :password
+    = f.password_field :password, class: 'form-control'
 
-  = f.label :remember_me do
-    = f.check_box :remember_me
-    %span Remember me
+  .checkbox
+    = f.label :remember_me do
+      = f.check_box :remember_me
+      Remember me
 
-  = f.submit 'Log in'
-
-= link_to 'Sign up', new_user_path
+  = f.submit 'Log in', class: 'btn btn-default'
