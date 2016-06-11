@@ -8,3 +8,5 @@
   = hidden_field_tag :category, @category.id
 
   = submit_tag 'Submit', class: 'btn btn-default'
+
+%p= link_to "Cancel", user_feed_categorizations_path(current_user)

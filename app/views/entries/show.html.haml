@@ -8,3 +8,5 @@
 %p.well
   = @entry.summary
   = link_to 'read more', @entry.url, target: '_blank'
+
+%p= link_to "back to #{@entry.feed.title}", @entry.feed

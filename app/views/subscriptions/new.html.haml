@@ -6,3 +6,5 @@
     = text_field_tag :feed_url, nil, class: 'form-control'
 
   = f.submit 'Submit', class: 'btn btn-default'
+
+%p= link_to "Cancel", user_subscriptions_path(current_user)
