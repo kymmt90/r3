@@ -3,4 +3,4 @@
     %a{ class: 'list-group-item',
         href:  feed_path(subscription.feed) }
       = "#{subscription.feed.title}"
-      %span.badge 0
+      %span.badge= current_user.unread_count(subscription.feed)
