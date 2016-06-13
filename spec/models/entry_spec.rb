@@ -5,6 +5,12 @@ RSpec.describe Entry, type: :model do
     it 'is valid' do
       expect(build(:entry)).to be_valid
     end
+
+    it 'is sorted in descending order of publishing datetime' do
+      old_entry = create(:entry, published_at: Time.now)
+      new_entry = create(:entry, published_at: 1.day.from_now)
+      expect(Entry.all).to eq [new_entry, old_entry]
+    end
   end
 
   describe 'invalid entry' do
@@ -27,7 +33,7 @@ RSpec.describe Entry, type: :model do
       expect(build(:entry, url: invalid_url)).not_to be_valid
     end
 
-    it 'is invalid withtout a published date' do
+    it 'is invalid without a published date' do
       expect(build(:entry, published_at: nil)).not_to be_valid
     end
   end

@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :feed do
     title { Faker::Name.title }
     url { Faker::Internet.url }
+    feed_url { Faker::Internet.url }
 
     factory :invalid_feed do
       title nil

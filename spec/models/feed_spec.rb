@@ -16,9 +16,9 @@ RSpec.describe Feed, type: :model do
       expect(build(:feed, url: nil)).not_to be_valid
     end
 
-    it 'is invalid with a duplicated URL' do
-      create(:feed, url: 'http://example.com/feed.xml')
-      feed = build(:feed, url: 'http://example.com/feed.xml')
+    it 'is invalid with a duplicated feed URL' do
+      create(:feed, feed_url: 'http://example.com/feed.xml')
+      feed = build(:feed, feed_url: 'http://example.com/feed.xml')
       expect(feed).not_to be_valid
     end
 
