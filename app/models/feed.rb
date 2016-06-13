@@ -53,7 +53,7 @@ class Feed < ActiveRecord::Base
   end
 
   def self.save_feed(fetched_feed)
-    return Feed.find_by(url: fetched_feed.url) if Feed.exists?(url: fetched_feed.url)
+    return Feed.find_by(feed_url: fetched_feed.feed_url) if Feed.exists?(feed_url: fetched_feed.feed_url)
     Feed.create(url: fetched_feed.url,
                 feed_url: fetched_feed.feed_url,
                 title: fetched_feed.title)
