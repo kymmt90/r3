@@ -14,12 +14,14 @@ gem 'haml-rails', '~> 0.9'
 gem 'feedjira', '~> 2.0'
 
 group :development, :test do
-  gem 'sqlite3', '~> 1.3'
   gem 'byebug'
-  gem 'rspec-rails', '~> 3.4'
   gem 'factory_girl_rails', '~> 4.7'
   gem 'guard-rspec', '~> 4.7'
+  gem 'rspec-rails', '~> 3.4'
   gem 'spring-commands-rspec', '~> 1.0'
+  gem 'sqlite3', '~> 1.3'
+  gem 'vcr', '~> 3.0'
+  gem 'webmock', '~> 2.1'
 end
 
 group :development do
