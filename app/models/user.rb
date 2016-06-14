@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  has_many :categories
+  has_many :categories,
+           dependent: :destroy
 
   has_many :subscriptions,
            foreign_key: 'user_id',
