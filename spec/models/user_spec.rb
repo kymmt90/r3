@@ -40,10 +40,29 @@ RSpec.describe User, type: :model do
       expect(user).not_to be_valid
     end
 
+    it 'is invalid with a blank password' do
+      user = build(:user, password: ' ' * 6, password_confirmation: nil)
+      expect(user).not_to be_valid
+    end
+
     it 'is invalid with a short password' do
       password = 'a' * 5
       user = build(:user, password: password, password_confirmation: password)
       expect(user).not_to be_valid
     end
+  end
+
+  specify 'associated categories should be destroyed' do
+    user = create(:user)
+    user.categories.create!(name: 'Foo')
+    expect {
+      user.destroy
+    }.to change(Category, :count).by(-1)
+  end
+
+  it 'subscribes its feed' do
+    user = create(:user)
+    feed = user.feeds.create!(feed_url: 'http://example.com/feed', url: 'http://example.com/', title: 'Foo')
+    expect(user.subscribe?(feed)).to be_truthy
   end
 end
