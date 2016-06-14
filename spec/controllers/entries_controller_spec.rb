@@ -1,7 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe EntriesController, type: :controller do
+  let(:user) { create(:user) }
   let(:feed) { create(:feed) }
+
+  before do
+    session[:user_id] = user.id
+  end
 
   describe 'GET #index' do
     let(:other_feed) { create(:feed) }

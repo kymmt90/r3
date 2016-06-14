@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe CategoriesController, type: :controller do
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
+
+  before do
+    session[:user_id] = user.id
+  end
 
   describe 'POST #create' do
     context 'with valid attributes' do
@@ -13,9 +17,9 @@ RSpec.describe CategoriesController, type: :controller do
         }.to change(Category, :count).by(1)
       end
 
-      it 'redirects to the user#show' do
+      it 'redirects to the feed_categorizations#index' do
         post :create, category: valid_attributes
-        expect(response).to redirect_to user
+        expect(response).to redirect_to user_feed_categorizations_url(user)
       end
     end
 
@@ -46,9 +50,9 @@ RSpec.describe CategoriesController, type: :controller do
         expect(assigns(:category)).to eq category
       end
 
-      it 'redirects to the user#show' do
+      it 'redirects to the feed_categorizations#index' do
         patch :update, id: category, category: valid_attributes
-        expect(response).to redirect_to user
+        expect(response).to redirect_to user_feed_categorizations_url(user)
       end
 
       it 'changes attributes of the category' do
@@ -88,9 +92,9 @@ RSpec.describe CategoriesController, type: :controller do
       }.to change(Category, :count).by(-1)
     end
 
-    it 'redirects to the root URL' do
+    it 'redirects to feed_categorizations#index' do
       delete :destroy, id: category
-      expect(response).to redirect_to root_url
+      expect(response).to redirect_to user_feed_categorizations_url(user)
     end
   end
 end

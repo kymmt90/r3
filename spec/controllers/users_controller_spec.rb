@@ -4,6 +4,10 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #show' do
     let(:user) { create(:user) }
 
+    before do
+      session[:user_id] = user.id
+    end
+
     it 'renders the :show template' do
       get :show, id: user
       expect(response).to render_template :show
@@ -62,6 +66,10 @@ RSpec.describe UsersController, type: :controller do
   describe 'GET #edit' do
     let(:user) { create(:user) }
 
+    before do
+      session[:user_id] = user.id
+    end
+
     it 'renders the :edit template' do
       get :edit, id: user
       expect(response).to render_template :edit
@@ -75,6 +83,10 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'PATCH #update' do
     let(:user) { create(:user, name: 'foo', email: 'foo@example.com') }
+
+    before do
+      session[:user_id] = user.id
+    end
 
     context 'with valid attributes' do
       it 'assigns the requested users to @user' do
@@ -110,6 +122,10 @@ RSpec.describe UsersController, type: :controller do
 
   describe 'DELETE #destroy' do
     let!(:user) { create(:user) }
+
+    before do
+      session[:user_id] = user.id
+    end
 
     it 'assigns the requested user to @user' do
       delete :destroy, id: user

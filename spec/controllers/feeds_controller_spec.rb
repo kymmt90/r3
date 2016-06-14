@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe FeedsController, type: :controller do
+  let(:user) { create(:user) }
+
+  before do
+    session[:user_id] = user.id
+  end
+
   describe 'POST #create' do
     context 'with valid attributes' do
       let(:valid_attributes) { attributes_for(:feed) }

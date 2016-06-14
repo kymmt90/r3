@@ -1,19 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe SubscriptionsController, type: :controller do
+  let(:user) { create(:user) }
 
-  describe "GET #index" do
-    it "returns http success" do
-      get :index
-      expect(response).to have_http_status(:success)
+  before do
+    session[:user_id] = user.id
+  end
+
+  describe 'GET #index' do
+    it 'renders the :index template' do
+      get :index, user_id: user
+      expect(response).to render_template :index
     end
   end
 
-  describe "GET #new" do
-    it "returns http success" do
-      get :new
-      expect(response).to have_http_status(:success)
+  describe 'GET #new' do
+    it 'renders the :new template' do
+      get :new, user_id: user
+      expect(response).to render_template :new
     end
   end
-
 end
