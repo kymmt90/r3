@@ -12,7 +12,7 @@ class FeedCategorizationsController < ApplicationController
 
   def create
     @feed = Feed.find(params[:feed])
-    @categorization = @feed.feed_categorizations.build(category_id: params[:category])
+    @categorization = @feed.feed_categorizations.build(category_id: params[:category_id])
     if @categorization.save
       redirect_to user_feed_categorizations_path(current_user)
     else

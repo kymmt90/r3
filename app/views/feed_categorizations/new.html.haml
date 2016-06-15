@@ -5,7 +5,7 @@
     = label_tag :feed
     = select_tag :feed, options_from_collection_for_select(current_user.feeds, :id, :title), class: 'form-control'
 
-  = hidden_field_tag :category, @category.id
+  = hidden_field_tag :category_id, @category.id
 
   = submit_tag 'Submit', class: 'btn btn-default'
 
