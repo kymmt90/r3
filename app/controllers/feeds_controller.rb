@@ -18,7 +18,7 @@ class FeedsController < ApplicationController
 
   def refresh
     @feed.refresh
-    initialize_reading_statuses(current_user, @feed)
+    @feed.initialize_reading_statuses(current_user)
     redirect_to @feed
   end
 
