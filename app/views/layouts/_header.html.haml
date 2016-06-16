@@ -5,7 +5,7 @@
         = link_to 'R3', root_path
       %ul.nav.navbar-nav
         - if logged_in?
-          %li= link_to "#{current_user.name} <#{current_user.email}>", current_user
+          %li= link_to "#{current_user.name} <#{current_user.email}>", edit_user_path(current_user)
           %li= link_to 'Subscriptions', user_subscriptions_path(current_user)
           %li= link_to 'Categories', user_feed_categorizations_path(current_user)
           %li= link_to 'Log out', logout_path, method: :delete
