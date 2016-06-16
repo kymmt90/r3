@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   resources :feeds, only: [:show, :create, :destroy] do
     resources :entries, only: [:show]
   end
-  get 'feeds/refresh/:id' => 'feeds#refresh', as: 'refresh_feed'
+  patch 'feeds/refresh/:id' => 'feeds#refresh', as: 'refresh_feed'
 
   resources :reading_statuses, only: [:update]
 

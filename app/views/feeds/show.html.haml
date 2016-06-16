@@ -1,6 +1,6 @@
 %h1
   = link_to @feed.title, @feed.url, target: '_blank'
-  %small= link_to 'Refresh', refresh_feed_path(@feed)
+  %small= link_to 'Refresh', refresh_feed_path(@feed), method: :patch
 
 .list-group
 - @feed.entries.each do |entry|
