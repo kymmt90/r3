@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :reading_statuses, only: [:update]
 
   resources :users, except: [:index] do
-    resources :feed_categorizations, except: [:edit, :update]
+    resources :feed_categorizations, except: [:edit, :update], path: 'categorizations'
     resources :subscriptions, except: [:edit, :update]
   end
 end
