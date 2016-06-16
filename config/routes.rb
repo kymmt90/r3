@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     resources :feed_categorizations, only: [:index, :new, :create, :destroy]
   end
   resources :feeds, only: [:show, :create, :destroy] do
-    resources :entries, only: [:index, :show]
+    resources :entries, only: [:show]
   end
   get 'feeds/refresh/:id' => 'feeds#refresh', as: 'refresh_feed'
   resources :categories, only: [:new, :create, :edit, :update, :destroy]

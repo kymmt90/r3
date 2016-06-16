@@ -8,27 +8,6 @@ RSpec.describe EntriesController, type: :controller do
     session[:user_id] = user.id
   end
 
-  describe 'GET #index' do
-    let(:other_feed) { create(:feed) }
-
-    before do
-      30.times do
-        create(:entry, feed_id: feed.id)
-        create(:entry, feed_id: other_feed.id)
-      end
-    end
-
-    it 'renders the :index template' do
-      get :index, feed_id: feed.id
-      expect(response).to render_template :index
-    end
-
-    it "assigns the feed's entries to @entries" do
-      get :index, feed_id: feed.id
-      expect(assigns(:entries)).to match_array feed.entries
-    end
-  end
-
   describe 'GET #show' do
     let(:entry) { create(:entry, feed_id: feed.id) }
 
