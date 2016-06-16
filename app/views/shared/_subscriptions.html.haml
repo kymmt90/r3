@@ -1,6 +1,10 @@
 .list-group
   - user.subscriptions.each do |subscription|
-    %a{ class: 'list-group-item',
-        href:  feed_path(subscription.feed) }
-      = "#{subscription.feed.title}"
+    .list-group-item
+      = link_to "#{subscription.feed.title}", feed_path(subscription.feed)
+      |
+      = link_to 'delete',
+      user_subscription_path(id: subscription, user_id: current_user),
+      method: :delete,
+      data: { confirm: 'Are you sure?' }
       %span.badge= current_user.unread_count(subscription.feed)
