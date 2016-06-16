@@ -6,7 +6,8 @@ class ReadingStatusesController < ApplicationController
     status = ReadingStatus.find_by(user_id: params[:user_id],
                                    entry_id: params[:entry_id])
     if status && status.update_attributes(status: params[:reading_status])
-      head :ok
+      entry = Entry.find(params[:entry_id])
+      redirect_to feed_path(entry.feed)
     else
       head :ng
     end
@@ -16,7 +17,7 @@ class ReadingStatusesController < ApplicationController
   private
 
   def check_correct_user
-    user = User.find_by(id: params[:user_id])
+    user = User.find(params[:user_id])
     redirect_to root_url unless current_user?(user)
   end
 end

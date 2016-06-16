@@ -43,14 +43,14 @@ RSpec.describe ReadingStatusesController, type: :controller do
           expect(@status.status).to eq 'read'
         end
 
-        it 'returns http success' do
+        it 'redirects to the feeds URL' do
           patch :update,
                 id: @status,
                 user_id: user,
                 entry_id: entry,
                 reading_status: :read
           @status.reload
-          expect(response).to have_http_status(:success)
+          expect(response).to redirect_to feed_url(entry.feed)
         end
       end
 

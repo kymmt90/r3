@@ -3,7 +3,7 @@
 %p
   %small= "by #{@entry.author} at #{@entry.published_at}"
   %small /
-  %small= link_to 'keep unread', '#'
+  %small= link_to 'keep unread', reading_status_path(@entry.reading_statuses.find_by(user_id: current_user.id), user_id: current_user.id, entry_id: @entry.id, reading_status: :unread), method: :patch
 
 %p.well
   = @entry.summary
