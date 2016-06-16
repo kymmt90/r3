@@ -17,5 +17,13 @@ RSpec.describe FeedCategorization, type: :model do
       categorization = build(:feed_categorization, category: nil)
       expect(categorization).not_to be_valid
     end
+
+    it 'is invalid with duplicated category and feed' do
+      category = create(:category)
+      feed = create(:feed)
+      create(:feed_categorization, category: category, feed: feed)
+      categorization = build(:feed_categorization, category: category, feed: feed)
+      expect(categorization).not_to be_valid
+    end
   end
 end

@@ -22,5 +22,13 @@ RSpec.describe ReadingStatus, type: :model do
       reading_status = build(:reading_status, status: nil)
       expect(reading_status).not_to be_valid
     end
+
+    it 'is invalid with duplicated entry and user' do
+      entry = create(:entry, feed: create(:feed))
+      user = create(:user)
+      create(:reading_status, entry: entry, user: user)
+      status = build(:reading_status, entry: entry, user: user)
+      expect(status).not_to be_valid
+    end
   end
 end
