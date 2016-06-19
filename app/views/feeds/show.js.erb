@@ -1,0 +1,7 @@
+<% if params[:unread_only] == '1' %>
+  $('#unread-switch').html("<%= j(link_to 'Show all entries', { controller: :feeds, action: :show, unread_only: 0 }, remote: true) %>");
+  $('#entries').html("<%= j(render 'unread_entries') %>");
+<% else %>
+  $('#unread-switch').html("<%= j(link_to 'Show unread entries only', { controller: :feeds, action: :show, unread_only: 1 }, remote: true) %>");
+  $('#entries').html("<%= j(render 'entries') %>");
+<% end %>

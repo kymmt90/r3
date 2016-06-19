@@ -3,6 +3,10 @@ class FeedsController < ApplicationController
   before_action :set_feed, only: [:show, :destroy, :refresh]
 
   def show
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
@@ -30,6 +34,6 @@ class FeedsController < ApplicationController
   end
 
   def feed_params
-    params.require(:feed).permit(:feed_url, :url, :title)
+    params.require(:feed).permit(:feed_url, :url, :title, :unread_only)
   end
 end

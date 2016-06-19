@@ -1,0 +1,2 @@
+- @feed.entries.each do |entry|
+  = render partial: 'shared/entry', locals: { entry: entry, user: current_user }
