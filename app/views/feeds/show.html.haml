@@ -5,6 +5,8 @@
 - @feed.categories.where(user: current_user).each do |category|
   %span.label.label-primary= category.name
 
-.list-group
-- @feed.entries.each do |entry|
-  = render partial: 'shared/entry', locals: { entry: entry, user: current_user }
+#unread-switch
+  = link_to 'Show all entries', { controller: :feeds, action: :show, unread_only: 0 }, remote: true
+
+.list-group#entries
+  = render 'unread_entries'

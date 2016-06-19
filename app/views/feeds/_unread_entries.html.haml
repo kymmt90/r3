@@ -1,0 +1,3 @@
+- @feed.entries.each do |entry|
+  - if entry.reading_statuses.find_by(user: current_user).unread?
+    = render partial: 'shared/entry', locals: { entry: entry, user: current_user }
