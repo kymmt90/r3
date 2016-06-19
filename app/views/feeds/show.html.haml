@@ -2,6 +2,9 @@
   = link_to @feed.title, @feed.url, target: '_blank'
   %small= link_to 'Refresh', refresh_feed_path(@feed), method: :patch
 
+- @feed.categories.where(user: current_user).each do |category|
+  %span.label.label-primary= category.name
+
 .list-group
 - @feed.entries.each do |entry|
   = render partial: 'shared/entry', locals: { entry: entry, user: current_user }
