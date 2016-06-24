@@ -1,4 +1,4 @@
 %a{ class: 'list-group-item',
     href:  feed_entry_path(feed_id: entry.feed, id: entry) }
-  = "#{entry.title}"
+  = "#{entry.title} [#{time_ago_in_words(entry.published_at)} ago]"
   %span.badge= entry.reading_statuses.find_by(user_id: user.id).status
