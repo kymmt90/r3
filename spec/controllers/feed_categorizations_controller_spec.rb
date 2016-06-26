@@ -112,8 +112,25 @@ RSpec.describe FeedCategorizationsController, type: :controller do
           }.not_to change(FeedCategorization, :count)
         end
 
-        it 're-renders the :new template' do
+        it 're-renders the :index template' do
           post :create, user_id: user, category_id: nil, feed: @feed
+          expect(response).to render_template :index
+        end
+      end
+
+      context 'with an already added feed' do
+        before do
+          create(:feed_categorization, feed_id: @feed.id, category_id: @category.id)
+        end
+
+        it 'does not save the new categorization in the database' do
+          expect {
+            post :create, user_id: user, category_id: @category, feed: @feed
+          }.not_to change(FeedCategorization, :count)
+        end
+
+        it 're-renders the :new template' do
+          post :create, user_id: user, category_id: @category, feed: @feed
           expect(response).to render_template :new
         end
       end

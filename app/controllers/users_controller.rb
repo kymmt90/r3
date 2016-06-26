@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    redirect_to root_url if logged_in?
     @user = User.new
   end
 
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update_attributes(user_params)
-      flash[:success] = 'User updated'
+      flash[:success] = 'User profile updated'
       redirect_to @user
     else
       render 'edit'

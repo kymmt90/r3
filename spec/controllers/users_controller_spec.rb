@@ -29,6 +29,13 @@ RSpec.describe UsersController, type: :controller do
       get :new
       expect(assigns(:user)).to be_a_new(User)
     end
+
+    it 'redirects to the root URL if the user is logging in' do
+      user = create(:user)
+      session[:user_id] = user.id
+      get :new
+      expect(response).to redirect_to root_url
+    end
   end
 
   describe 'POST #create' do

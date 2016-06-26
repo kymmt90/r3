@@ -73,7 +73,7 @@ RSpec.describe CategoriesController, type: :controller do
 
       it 'redirects to the root' do
         patch :update, id: category, category: invalid_attributes
-        expect(response).to redirect_to root_url
+        expect(response).to render_template :edit
       end
     end
   end

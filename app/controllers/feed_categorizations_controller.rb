@@ -16,7 +16,14 @@ class FeedCategorizationsController < ApplicationController
     if @categorization.save
       redirect_to user_feed_categorizations_path(current_user)
     else
-      flash.now[:danger] = 'Failed'
+      if params[:category_id].nil?
+        flash.now[:danger] = 'Failed'
+        render 'index'
+        return
+      end
+
+      @category = Category.find(params[:category_id])
+      flash.now[:danger] = "Failed (maybe it has already added to #{@category.name})"
       render 'new'
     end
   end

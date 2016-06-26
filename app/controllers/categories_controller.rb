@@ -24,7 +24,8 @@ class CategoriesController < ApplicationController
       flash[:success] = 'Category updated'
       redirect_to user_feed_categorizations_url(current_user)
     else
-      redirect_to root_url
+      flash.now[:danger] = 'Fails to update category'
+      render :edit
     end
   end
 

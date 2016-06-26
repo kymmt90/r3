@@ -26,6 +26,7 @@ class Feed < ActiveRecord::Base
 
   def self.fetch(feed_url)
     return nil unless feed_url =~ URL_REGEXP
+    return Feed.find_by(feed_url: feed_url) if Feed.exists?(feed_url: feed_url)
     self.fetch_and_save(feed_url)
   end
 

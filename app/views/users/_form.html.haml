@@ -1,4 +1,10 @@
 = form_for @user do |f|
+  - if @user.errors.any?
+    .alert.alert-danger
+      %ul
+        - @user.errors.full_messages.each do |message|
+          %li= message
+
   .form-group
     = f.label :name
     = f.text_field :name, class: 'form-control'

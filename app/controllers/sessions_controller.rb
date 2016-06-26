@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    redirect_to root_url if logged_in?
     @user = User.new
   end
 
@@ -11,7 +12,7 @@ class SessionsController < ApplicationController
       flash[:success] = 'Welcome'
       redirect_back_or user
     else
-      flash[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
   end
