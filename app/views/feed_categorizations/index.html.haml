@@ -15,4 +15,7 @@
       %li.list-group-item
         = link_to feed.title, feed.url
         |
-        = link_to 'delete', user_feed_categorization_path(user_id: current_user, id: category.feed_categorizations.find_by(feed_id: feed.id)), method: :delete, data: { confirm: 'Are you sure?' }
+        = link_to 'delete',
+                  user_feed_categorization_path(current_user,
+                                                category.feed_categorizations.find_by(feed_id: feed.id)),
+                  method: :delete, data: { confirm: 'Are you sure?' }
