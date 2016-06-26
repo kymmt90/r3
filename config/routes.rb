@@ -18,4 +18,6 @@ Rails.application.routes.draw do
     resources :feed_categorizations, except: [:edit, :update], path: 'categorizations'
     resources :subscriptions, except: [:edit, :update]
   end
+
+  match '*path' => 'application#error404', via: :all
 end
