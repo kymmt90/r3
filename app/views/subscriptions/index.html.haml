@@ -2,4 +2,4 @@
 
 %p= link_to 'Add new feed', new_user_subscription_path(current_user)
 
-= render partial: 'shared/subscriptions', locals: { user: current_user }
+= render partial: 'shared/subscriptions', locals: { subscriptions: @subscriptions }

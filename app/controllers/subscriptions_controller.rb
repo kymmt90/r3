@@ -3,7 +3,7 @@ class SubscriptionsController < ApplicationController
   before_action :check_correct_user
 
   def index
-    @subscriptions = current_user.subscriptions.all
+    @subscriptions = current_user.subscriptions.all.includes(:feed)
   end
 
   def new

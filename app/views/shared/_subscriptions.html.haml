@@ -1,5 +1,5 @@
 .list-group
-  - user.subscriptions.each do |subscription|
+  - subscriptions.each do |subscription|
     .list-group-item
       = link_to "#{subscription.feed.title}", feed_path(subscription.feed)
       |

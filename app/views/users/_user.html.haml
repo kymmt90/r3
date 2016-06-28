@@ -3,4 +3,4 @@
 %p
   = link_to 'Add new feed', new_user_subscription_path(user)
 
-= render partial: 'shared/subscriptions', locals: { user: user }
+= render partial: 'shared/subscriptions', locals: { user: user, subscriptions: user.subscriptions.includes(:feed) }
