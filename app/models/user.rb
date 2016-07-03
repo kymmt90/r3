@@ -51,12 +51,7 @@ class User < ActiveRecord::Base
   end
 
   def unread_count(feed)
-    count = 0
-    feed.entries.each do |entry|
-      reading_status = ReadingStatus.find_by(user_id: self.id, entry_id: entry.id)
-      count += reading_status.unread? ? 1 : 0
-    end
-    count
+    self.reading_statuses.where(entry_id: feed.entries, status: ReadingStatus.statuses[:unread]).count
   end
 
 
