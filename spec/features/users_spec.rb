@@ -139,5 +139,20 @@ feature 'User' do
       visit root_path
       expect(page).not_to have_content 'The requested feed was not found'
     end
+
+    scenario 'decrement the count of unread entries' do
+      feed = create(:feed)
+      30.times do
+        entry = create(:entry, feed: feed)
+        create(:reading_status, entry: entry, user: @user)
+      end
+      create(:subscription, feed: feed, user: @user)
+
+      click_link 'Subscriptions'
+      click_link "#{feed.title}"
+      click_link "#{feed.entries[0].title}", match: :first
+      click_link "Subscriptions"
+      expect(page).to have_content '29'
+    end
   end
 end
